@@ -8,9 +8,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a >Documents</a></li>
-        <li routerLinkActive="active"><a >Messages</a></li>
-        <li routerLinkActive="active"><a >Contacts</a></li>
+        <li routerLinkActive="active"><a (click)="onSelcted('documents')" >Documents</a></li>
+        <li routerLinkActive="active"><a (click)="onSelcted('messages')">Messages</a></li>
+        <li routerLinkActive="active"><a (click)="onSelcted('contacts')" >Contacts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

@@ -6,14 +6,14 @@ import {Contact} from '../contact';
   templateUrl: './contact-list.component.html',
 })
 export class ContactListComponent implements OnInit {
-  @Output() Selected = new EventEmitter<Contact>();
+  @Output() selecteEvent = new EventEmitter<Contact>();
   contact: Contact = null;
   contacts: Contact[] = [];
   constructor( ) {
   }
 
   onSelected(contact: Contact) {
-    this.Selected.emit(contact);
+    this.selecteEvent.emit(contact);
   }
 
   ngOnInit() {
