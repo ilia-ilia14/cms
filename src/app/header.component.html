@@ -13,9 +13,9 @@
         <li routerLinkActive="active"><a (click)="onSelcted('contacts')" >Contacts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+        <li class="dropdown" appDropDown>
+          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+          <ul class="dropdown-menu open" >
             <li><a href="#">Login</a></li>
             <li><a href="#">Other</a></li>
             <li role="separator" class="divider"></li>
@@ -26,3 +26,4 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
