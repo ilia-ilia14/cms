@@ -19,6 +19,22 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import {Messagesservice} from './messages/messages.services';
 import {DropdownDirective} from './dropdown.directive';
+import {Contactservice} from './contacts/contacts.service';
+import {Documentservice} from './documents/documents.service';
+import {RouterModule, Routes} from '@angular/router';
+import {DocumentEditComponent} from './documents/document-edit/document-edit.component';
+import {MessageNewComponent} from './messages/message-new/message-new.component';
+import {HomeComponent} from "./home.component";
+
+const appRoutes: Routes = [
+  {path: '', component: AppComponent},
+  {path: 'documents', component: DocumentsComponent},
+  {path: 'documents/:id/edit', component: DocumentEditComponent},
+  {path: 'messages', component: MessagesComponent},
+  {path: 'contacts', component: ContactsComponent},
+  {path: 'contacts/:id/edit', component: ContactsComponent},
+  {path: 'home', component: HomeComponent},
+];
 
 @NgModule({
   declarations: [
@@ -36,14 +52,18 @@ import {DropdownDirective} from './dropdown.directive';
     MessageItemComponent,
     MessageEditComponent,
     MessageListComponent,
-    DropdownDirective
+    DropdownDirective,
+    DocumentEditComponent,
+    MessageNewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [Messagesservice],
+  providers: [Messagesservice, Contactservice, Documentservice],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

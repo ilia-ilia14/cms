@@ -1,19 +1,23 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Injectable} from '@angular/core';
 import {Contact} from '../contact';
+import {Contactservice} from "../contacts.service";
 
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
 })
+
+@Injectable()
 export class ContactListComponent implements OnInit {
-  @Output() selecteEvent = new EventEmitter<Contact>();
   contact: Contact = null;
   contacts: Contact[] = [];
-  constructor( ) {
+
+  constructor(private contactService: Contactservice) {
+    this.contacts = contactService.getcontacts();
   }
 
   onSelected(contact: Contact) {
-    this.selecteEvent.emit(contact);
+    this.contactService.contactSelectedEvent.emit(contact);
   }
 
   ngOnInit() {
@@ -21,22 +25,10 @@ export class ContactListComponent implements OnInit {
   }
 
   getContacts() {
-    this.contacts[0] = new Contact('1',
-      'Bro. Jackson',
-      'jacksonk@byui.edu',
-      '208-496-3771',
-      'https://web.byui.edu/Directory/Employee/jacksonk.jpg', null );
-    this.contacts[1] = new Contact('1',
-      'Bro. Barzee',
-      'barzeer@byui.edu',
-      '208-496-3768',
-      'https://web.byui.edu/Directory/Employee/barzeer.jpg', null );
-    this.contacts[2] = new Contact('1',
-      'Bro. Barzee',
-      'barzeer@byui.edu',
-      '208-496-3768',
-      'https://web.byui.edu/Directory/Employee/barzeer.jpg', null );
     return this.contacts;
+  }
+  newContact() {
+    console.log('new contact');
   }
 
 }
