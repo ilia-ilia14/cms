@@ -11,9 +11,6 @@ selectedDocument: Document;
   constructor(private documentService: Documentservice) { }
 
   ngOnInit() {
-    this.documentService.documentSelectedEvent.subscribe(
-      (document: Document) => { this.selectedDocument = document; }
-    );
   }
 
 }

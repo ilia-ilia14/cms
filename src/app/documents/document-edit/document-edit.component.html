@@ -3,27 +3,19 @@
 
     <form id="document-edit" (ngSubmit)="saveServer(f)" #f="ngForm">
       <div class="row">
-        <input
-          type="hidden"
-          id="id"
-          name="id"
-          [ngModel]="oldDocument.id"
-          #idInput="ngModel"
-          class="form-control"
-          size="120"
-          max="120">
-
         <div class="col-sm-12 form-group">
           <label for="name">Document title</label>
           <input
             type="text"
             id="name"
             name="name"
-            [ngModel]="oldDocument.name"
+            required
+            [ngModel]="oldDocument?.name"
             #nameInput="ngModel"
             class="form-control"
             size="120"
             max="120">
+          <div class="alert alert-danger" *ngIf="nameInput.dirty && !nameInput.valid">Invalid email</div>
         </div>
 
 
@@ -33,6 +25,7 @@
             type="text"
             id="description"
             name="description"
+            required
             class="form-control"
             size="120"
             max="255">
@@ -44,23 +37,24 @@
             type="text"
             id="documentUrl"
             name="url"
-            [ngModel]="oldDocument.url"
-            urlInput  = "ngModel"
+            required
+            [ngModel]="oldDocument?.url"
+            #urlInput  = "ngModel"
             class="form-control"
             size="150"
             max="255">
+          <div class="alert alert-danger" *ngIf="urlInput.dirty && !urlInput.valid">Invalid email</div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit" >Save</button>
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>
           <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
         </div>
       </div>
 
     </form>
-
   </div>
 </div>
 

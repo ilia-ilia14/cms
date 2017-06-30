@@ -1,9 +1,8 @@
 <div class="row">
-  <div class="col-md-3">
-
-  </div>
-  <div class="col-md-9">
+  <div class="col-md-5">
     <app-document-list ></app-document-list>
-    <app-document-detail [document]="selectedDocument"></app-document-detail>
+  </div>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
   </div>
 </div>

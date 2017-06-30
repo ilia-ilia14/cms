@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Document} from '../document';
 import {Documentservice} from "../documents.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {WindowReference} from "../../win-ref.service";
 
 @Component({
   selector: 'app-document-detail',
@@ -9,20 +10,34 @@ import {Router} from "@angular/router";
   styleUrls: ['./document-detail.component.css']
 })
 export class DocumentDetailComponent implements OnInit {
-@Input() document: Document;
-  constructor(private documentService: Documentservice, private router: Router) { }
+document: Document;
+  nativeWindow: any;
+  constructor(private documentService: Documentservice, private router: Router, private route: ActivatedRoute,
+  windowReferenceService: WindowReference) {
+    this.nativeWindow = windowReferenceService.getNative();
+  }
 
   ngOnInit() {
+    this.route.queryParams.subscribe();
+    this.route.params.subscribe(
+      (params: Params) => {
+         const id = params['id'];
+         this.document = this.documentService.getDocument(id);
+      }
+    );
   }
   editDocument() {
-    this.router.navigate(['/documents', this.document.id, 'edit'], {queryParams: {editMode: 1}, fragment: 'loading'});
+   // this.router.navigate(['edit']);
   }
   onDelete() {
     this.documentService.deleteDocument(this.document);
     this.router.navigate(['/']);
   }
   viewDocument() {
-    console.log(document);
+   // console.log(document);
+    if (this.document.url) {
+      this.nativeWindow.open(this.document.url);
+    }
   }
 }
 

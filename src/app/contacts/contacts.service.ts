@@ -17,10 +17,13 @@ export class Contactservice implements OnInit {
   }
 
   getContact(id: number) {
+    /*
     if (id < 0 || id >= this.contacts.length) {
       throw new Error('Array index out of bounds.');
     }
     return this.contacts[id];
+    */
+    return this.contacts.find((contact: Contact) => +contact.id === id);
   }
 
   deleteContact(contact: Contact) {
@@ -36,6 +39,20 @@ export class Contactservice implements OnInit {
 
   addContact(contact: Contact) {
     this.contacts.push(contact);
+  }
+  updateContact(oldContact: Contact, newContact: Contact) {
+    this.contacts[this.contacts.indexOf(oldContact)] = newContact;
+  }
+
+  getMaxId() {
+    let maxId = 0;
+    for (let i = 0; i < this.contacts.length; i++) {
+      const id_num = parseInt(this.contacts[i].id, 10)
+      if (id_num > maxId) {
+        maxId = id_num;
+      }
+    }
+    return maxId;
   }
 
 }

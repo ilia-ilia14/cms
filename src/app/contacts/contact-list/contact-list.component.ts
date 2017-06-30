@@ -9,15 +9,10 @@ import {Contactservice} from "../contacts.service";
 
 @Injectable()
 export class ContactListComponent implements OnInit {
-  contact: Contact = null;
   contacts: Contact[] = [];
 
   constructor(private contactService: Contactservice) {
     this.contacts = contactService.getcontacts();
-  }
-
-  onSelected(contact: Contact) {
-    this.contactService.contactSelectedEvent.emit(contact);
   }
 
   ngOnInit() {

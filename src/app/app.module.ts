@@ -24,17 +24,12 @@ import {Documentservice} from './documents/documents.service';
 import {RouterModule, Routes} from '@angular/router';
 import {DocumentEditComponent} from './documents/document-edit/document-edit.component';
 import {MessageNewComponent} from './messages/message-new/message-new.component';
-import {HomeComponent} from "./home.component";
+import {HomeComponent} from './home.component';
+import {AppRoutingModule} from './app-routing.module';
+import {WindowReference} from './win-ref.service';
+import {ContactEditComponent} from './contacts/contact-edit/contact-edit.component';
 
-const appRoutes: Routes = [
-  {path: '', component: AppComponent},
-  {path: 'documents', component: DocumentsComponent},
-  {path: 'documents/:id/edit', component: DocumentEditComponent},
-  {path: 'messages', component: MessagesComponent},
-  {path: 'contacts', component: ContactsComponent},
-  {path: 'contacts/:id/edit', component: ContactsComponent},
-  {path: 'home', component: HomeComponent},
-];
+
 
 @NgModule({
   declarations: [
@@ -55,15 +50,16 @@ const appRoutes: Routes = [
     DropdownDirective,
     DocumentEditComponent,
     MessageNewComponent,
-    HomeComponent
+    HomeComponent,
+    ContactEditComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule,
   ],
-  providers: [Messagesservice, Contactservice, Documentservice],
+  providers: [Messagesservice, Contactservice, Documentservice, WindowReference],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Documentservice} from '../documents.service';
 import {Document } from '../document';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-document-edit',
@@ -14,41 +14,43 @@ export class DocumentEditComponent implements OnInit {
   oldDocument: Document;
   newDocument: Document = null;
   id: string;
-
   subscription: Subscription; // route subscription
   editMode = false; // in edit mode flag?
+
 
   private documentService: any;
   constructor(documentService: Documentservice, private route: ActivatedRoute, private router: Router) {
     this.documentService = documentService;
   }
   ngOnInit() {
-    console.log(this.route.snapshot.queryParams);
     this.route.queryParams.subscribe();
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
+        if (this.id) {
+          this.editMode = true;
+          this.oldDocument = this.documentService.getDocument(this.id);
+
+        }
       }
     );
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.editMode = params['editMode'];
-      }
-    );
-   this.oldDocument = this.documentService.getDocument(this.id);
-
-
   }
 
   saveServer(f) {
-    this.newDocument = new Document(f.value.id, f.value.name, f.value.url);
+    // If editmode is true than update the document else push new doc in the array ///
     if (this.editMode) {
+      this.newDocument = new Document(this.oldDocument.id, f.value.name, f.value.url);
     this.documentService.updateDocument(this.oldDocument, this.newDocument);
-      console.log('update');
+
       }else {
+      const newId = this.documentService.getMaxId() + 1;
+      console.log(newId);
+      this.newDocument = new Document(newId, f.value.name, f.value.url);
       this.documentService.addDocument(this.newDocument);
-      console.log('new');
     }
+    this.router.navigate(['/documents']);
+  }
+  onCancel() {
     this.router.navigate(['/documents']);
   }
 }

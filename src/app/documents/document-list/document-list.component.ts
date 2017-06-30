@@ -18,13 +18,7 @@ export class DocumentListComponent implements OnInit {
   ngOnInit() {
     this.getDocuments();
   }
-  onSelected(document: Document) {
-   this.documentService.documentSelectedEvent.emit(document);
-  }
   getDocuments() {
     return this.documents;
-  }
-  addDocument() {
-    this.router.navigate(['/documents', '40', 'edit'], {queryParams: {allowEdit: 1}, fragment: 'loading'});
   }
 }
