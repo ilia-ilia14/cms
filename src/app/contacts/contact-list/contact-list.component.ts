@@ -1,6 +1,7 @@
 import {Component, OnInit, EventEmitter, Output, Injectable} from '@angular/core';
 import {Contact} from '../contact';
 import {Contactservice} from "../contacts.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-contact-list',
@@ -11,19 +12,15 @@ import {Contactservice} from "../contacts.service";
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
 
-  constructor(private contactService: Contactservice) {
-    this.contacts = contactService.getcontacts();
+  constructor(private contactService: Contactservice, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.getContacts();
+    this.contacts = this.contactService.contacts;
   }
 
   getContacts() {
     return this.contacts;
-  }
-  newContact() {
-    console.log('new contact');
   }
 
 }

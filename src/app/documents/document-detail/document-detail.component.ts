@@ -31,7 +31,7 @@ document: Document;
   }
   onDelete() {
     this.documentService.deleteDocument(this.document);
-    this.router.navigate(['/']);
+    this.router.navigate(['documents']);
   }
   viewDocument() {
    // console.log(document);

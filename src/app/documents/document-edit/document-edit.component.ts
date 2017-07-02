@@ -30,7 +30,6 @@ export class DocumentEditComponent implements OnInit {
         if (this.id) {
           this.editMode = true;
           this.oldDocument = this.documentService.getDocument(this.id);
-
         }
       }
     );
@@ -40,14 +39,14 @@ export class DocumentEditComponent implements OnInit {
     // If editmode is true than update the document else push new doc in the array ///
     if (this.editMode) {
       this.newDocument = new Document(this.oldDocument.id, f.value.name, f.value.url);
-    this.documentService.updateDocument(this.oldDocument, this.newDocument);
+      this.documentService.updateDocument(this.oldDocument, this.newDocument);
 
       }else {
       const newId = this.documentService.getMaxId() + 1;
-      console.log(newId);
       this.newDocument = new Document(newId, f.value.name, f.value.url);
       this.documentService.addDocument(this.newDocument);
     }
+    f.reset();
     this.router.navigate(['/documents']);
   }
   onCancel() {

@@ -18,7 +18,6 @@ constructor() {
     // return document;
   }
   deleteDocument(document: Document) {
-    console.log(document);
     this.documents.splice(this.documents.indexOf(document), 1);
   }
 getDocuments() {
@@ -44,13 +43,5 @@ updateDocument(oldDoc: Document, newDoc: Document) {
       }
   }
   return maxId;
-    // maxId = 0
-    // for each document in the documents list
-    // currentId = convert document.id into a number
-    // if currentId > maxId then
-    // maxId = currentId
-    // endIf
-    // endFor
-    // return max
   }
 }

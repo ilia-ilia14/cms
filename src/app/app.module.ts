@@ -28,6 +28,8 @@ import {HomeComponent} from './home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {WindowReference} from './win-ref.service';
 import {ContactEditComponent} from './contacts/contact-edit/contact-edit.component';
+import {ContactGroupItemComponent} from './contacts/group-contact/contact-group-item.component';
+import {DndModule} from 'ng2-dnd';
 
 
 
@@ -52,12 +54,14 @@ import {ContactEditComponent} from './contacts/contact-edit/contact-edit.compone
     MessageNewComponent,
     HomeComponent,
     ContactEditComponent,
+    ContactGroupItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    DndModule.forRoot()
   ],
   providers: [Messagesservice, Contactservice, Documentservice, WindowReference],
   bootstrap: [AppComponent]

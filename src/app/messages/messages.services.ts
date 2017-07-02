@@ -12,16 +12,12 @@ export class Messagesservice implements OnInit {
     this.messages = MOCKMESSAGES;
   }
   ngOnInit() {
-    this.getMessages();
     this.addMessage(this.message);
   }
 
   addMessage(message: Message) {
   const exists = 0;
     this.messages.push(message);
-  }
-  getMessages() {
-
   }
 
 }

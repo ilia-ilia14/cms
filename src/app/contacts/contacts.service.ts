@@ -17,17 +17,10 @@ export class Contactservice implements OnInit {
   }
 
   getContact(id: number) {
-    /*
-    if (id < 0 || id >= this.contacts.length) {
-      throw new Error('Array index out of bounds.');
-    }
-    return this.contacts[id];
-    */
     return this.contacts.find((contact: Contact) => +contact.id === id);
   }
 
   deleteContact(contact: Contact) {
-    console.log(contact);
     this.contacts.splice(this.contacts.indexOf(contact), 1);
   }
   getcontacts() {

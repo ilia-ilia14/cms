@@ -10,13 +10,11 @@ import {Router} from "@angular/router";
 
 @Injectable()
 export class DocumentListComponent implements OnInit {
-  documents: Document[]= [];
+  documents: Document[]=  this.documentService.documents;
   constructor(private documentService: Documentservice, private router: Router) {
-    this.documents = documentService.getDocuments();
   }
 
   ngOnInit() {
-    this.getDocuments();
   }
   getDocuments() {
     return this.documents;

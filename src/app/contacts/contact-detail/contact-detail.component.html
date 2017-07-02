@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading" >
     <div class="col-xs-12">
       <h3>{{contact?.name}}</h3>
     </div>
@@ -7,7 +7,7 @@
       <img src="{{contact?.imageUrl}}" alt="" class="img-responsive">
     </div>
 
-    <div class="row">
+    <div class="row" >
       <div class="pull-right pad-left-right">
         <a class="btn btn-danger" (click)="deleteContact()" >Delete</a>
       </div>
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="panel-body">
+  <div class="panel-body" >
     <div class="row">
       <div class="col-xs-12">
         <p>Email: {{contact?.email}}</p>
@@ -28,5 +28,10 @@
       </div>
     </div>
   </div>
-</div>
 
+  <div class="row" *ngIf="contact.group !== null">
+    <div class="col-xs-12" id="groupContacts">
+      <app-contact-group-item *ngFor="let eachcontact of contact.group" [eachcontact]="eachcontact"></app-contact-group-item>
+    </div>
+</div>
+</div>
