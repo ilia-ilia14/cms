@@ -32,12 +32,12 @@ export class ContactEditComponent implements OnInit, OnDestroy {
   saveContact(f) {
     if (this.editMode) {
       this.newContact = new Contact(this.oldContact.id, f.value.name, f.value.email, f.value.phone, f.value.imageUrl, this.groupContacts);
-      this.contactsService.updateContact(this.oldContact, this.newContact);
+      this.contactsService.updateContact(this.oldContact, this.newContact).subscribe();
       console.log('update');
     }else {
       const newId = this.contactsService.getMaxId() + 1;
       this.newContact = new Contact(newId.toString(), f.value.name, f.value.email, f.value.phone, f.value.imageUrl, this.groupContacts);
-      this.contactsService.addContact(this.newContact);
+      this.contactsService.addContact(this.newContact).subscribe();
       console.log(newId);
       console.log(f.value.name);
     }

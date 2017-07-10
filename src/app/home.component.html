@@ -1,4 +1,52 @@
 <style>
-  h4 { margin-top: 20%; margin-left: 30%;}
+  h4, h3 { text-align: center;}
+
+
+  body {
+    padding: 2em 5em;
+    font: normal 40px/50px Arial, sans-serif;
+    color: #999;
+  }
+  p {
+    height: 50px;
+    float: left;
+    margin-right: 0.3em;
+  }
+  b {
+    float: left;
+    overflow: hidden;
+    position: relative;
+    height: 50px;
+  }
+  span {
+    display: inline-block;
+    color: #e74c3c;
+    position: relative;
+    white-space: nowrap;
+    top: 0;
+    left: 0;
+    -webkit-animation: move 5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-delay: 1s;
+  }
+
+  @keyframes move {
+    0%  { top: 0px; }
+    25% { top: -50px; }
+    50% { top: -100px; }
+    70% { top: -150px; }
+    100% { top: -200px; }
+  }
 </style>
-<h4>Welcome To CMS Home page!!</h4>
+<body>
+<p>BYUI CIT-301</p>
+<b>
+  <span>
+    Welcome<br />
+    To<br />
+    CMS<br />
+    Home<br />
+    page!!<br/>
+  </span>
+</b>
+</body>

@@ -23,4 +23,10 @@
       </div>
     </div>
   </div>
+
+  <div class="row docs"  *ngIf="document.children !== null">
+    <div class="col-xs-12 ">
+      <h4 style="text-align: center;">Sub-Documents</h4>
+      <app-document-group *ngFor="let eachdocument of document.children"  [groupDocument]="eachdocument"></app-document-group>
+    </div>
 </div>

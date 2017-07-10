@@ -38,13 +38,15 @@ export class DocumentEditComponent implements OnInit {
   saveServer(f) {
     // If editmode is true than update the document else push new doc in the array ///
     if (this.editMode) {
-      this.newDocument = new Document(this.oldDocument.id, f.value.name, f.value.url);
-      this.documentService.updateDocument(this.oldDocument, this.newDocument);
+      // this.newDocument = new Document(this.oldDocument.id, f.value.name, f.value.url);
+      this.newDocument = new Document(null, f.value.description, this.oldDocument.id, f.value.name, f.value.url);
+      this.documentService.updateDocument(this.oldDocument, this.newDocument).subscribe();
 
       }else {
       const newId = this.documentService.getMaxId() + 1;
-      this.newDocument = new Document(newId, f.value.name, f.value.url);
-      this.documentService.addDocument(this.newDocument);
+      // this.newDocument = new Document(newId, f.value.name, f.value.url);
+      this.newDocument = new Document(null, f.value.description, newId.toString(), f.value.name, f.value.url);
+      this.documentService.addDocument(this.newDocument).subscribe();
     }
     f.reset();
     this.router.navigate(['/documents']);

@@ -30,6 +30,8 @@ import {WindowReference} from './win-ref.service';
 import {ContactEditComponent} from './contacts/contact-edit/contact-edit.component';
 import {ContactGroupItemComponent} from './contacts/group-contact/contact-group-item.component';
 import {DndModule} from 'ng2-dnd';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
+import { DocumentGroupComponent } from './documents/document-group/document-group.component';
 
 
 
@@ -54,7 +56,9 @@ import {DndModule} from 'ng2-dnd';
     MessageNewComponent,
     HomeComponent,
     ContactEditComponent,
-    ContactGroupItemComponent
+    ContactGroupItemComponent,
+    ContactsFilterPipe,
+    DocumentGroupComponent
   ],
   imports: [
     BrowserModule,

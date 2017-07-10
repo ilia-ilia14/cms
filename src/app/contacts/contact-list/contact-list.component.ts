@@ -11,12 +11,16 @@ import {ActivatedRoute} from "@angular/router";
 @Injectable()
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
+  filtereContacts = '';
+
 
   constructor(private contactService: Contactservice, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.contacts = this.contactService.contacts;
+   // this.contacts = this.contactService.contacts;
+    this.contactService.getContacts().subscribe(
+      (contacts: Contact[]) => this.contacts = contacts);
   }
 
   getContacts() {

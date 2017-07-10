@@ -30,11 +30,10 @@ document: Document;
    // this.router.navigate(['edit']);
   }
   onDelete() {
-    this.documentService.deleteDocument(this.document);
+    this.documentService.deleteDocument(this.document).subscribe();
     this.router.navigate(['documents']);
   }
   viewDocument() {
-   // console.log(document);
     if (this.document.url) {
       this.nativeWindow.open(this.document.url);
     }

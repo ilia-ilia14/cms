@@ -27,6 +27,8 @@
             name="description"
             required
             class="form-control"
+            [ngModel]="oldDocument?.description"
+            #descInput = "ngModel"
             size="120"
             max="255">
         </div>
