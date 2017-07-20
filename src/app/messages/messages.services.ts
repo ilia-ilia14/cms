@@ -18,7 +18,7 @@ export class Messagesservice implements OnInit {
     this.addMessage(this.message);
   }
   getMessages() {
-    return this.http.get('https://iliacms-eb3e9.firebaseio.com/messages.json')
+    return this.http.get('http://localhost:3000/messages')
       .map(
         (response: Response) => { this.messages = response.json();
           return this.messages; },
@@ -29,12 +29,14 @@ export class Messagesservice implements OnInit {
   }
 
   addMessage(message: Message) {
-  const exists = 0;
-    this.messages.push(message);
-    return this.http.put('https://iliacms-eb3e9.firebaseio.com/messages.json', this.messages)
-      .map(
-        (response: Response) => { console.log(response.json()); }
-      );
+    const body = JSON.stringify(message);
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post('http://localhost:3000/messages',
+      body)
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw(JSON.stringify(error)));
   }
   getMaxId() {
     let maxId = 0;

@@ -18,11 +18,8 @@ export class Contactservice implements OnInit {
   ngOnInit() {
   }
 
-
-
-
   getContacts() {
-    return this.http.get('https://iliacms-eb3e9.firebaseio.com/contacts.json')
+    return this.http.get('http://localhost:3000/contacts')
       .map(
         (response: Response) => { return this.contacts = response.json();   }
       )
@@ -32,11 +29,14 @@ export class Contactservice implements OnInit {
    // return this.contacts.slice();
   }
   addContact(contact: Contact) {
-    this.contacts.push(contact);
-    return this.http.put('https://iliacms-eb3e9.firebaseio.com/contacts.json', this.contacts)
-      .map(
-        (response: Response) => { console.log(response.json()); }
-      );
+    const body = JSON.stringify(contact);
+    return this.http.post('http://localhost:3000/contacts',
+      body)
+      .map((response: Response) => {
+        const cont: Contact = response.json().obj;
+        return cont;
+      })
+      .catch((error: Response) => Observable.throw(JSON.stringify(error)));
   }
   updateContact(oldContact: Contact, newContact: Contact) {
     this.contacts[this.contacts.indexOf(oldContact)] = newContact;
@@ -46,11 +46,9 @@ export class Contactservice implements OnInit {
       );
   }
   deleteContact(contact: Contact) {
-    this.contacts.splice(this.contacts.indexOf(contact), 1);
-    return this.http.put('https://iliacms-eb3e9.firebaseio.com/contacts.json', this.contacts)
-      .map(
-        (response: Response) => { console.log(response.json()); }
-      );
+    return this.http.delete('http://localhost:3000/contacts/' + contact.id)
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw(JSON.stringify(error)));
   }
 
   getContact(id: number) {

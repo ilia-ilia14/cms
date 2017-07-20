@@ -16,7 +16,7 @@ constructor(private http: Http) {
     return this.documents.find((document: Document) => document.id === id);
   }
 getDocuments() {
-  return this.http.get('https://iliacms-eb3e9.firebaseio.com/documents.json')
+  return this.http.get('http://localhost:3000/documents')
     .map(
       (response: Response) => { this.documents = response.json();
       return this.documents; },
@@ -25,27 +25,43 @@ getDocuments() {
     );
 }
 
-updateDocument(oldDoc: Document, newDoc: Document) {
-   console.log(this.documents.indexOf(oldDoc));
-   this.documents[this.documents.indexOf(oldDoc)] = newDoc;
-   return this.http.put('https://iliacms-eb3e9.firebaseio.com/documents.json', this.documents)
-     .map(
-       (response: Response) => { console.log(response.json()); }
-     );
+updateDocument(originalDoc: Document, newDoc: Document) {
+  if (!originalDoc || !newDoc) { return; }
+
+  const pos = this.documents.indexOf(originalDoc);
+  if (pos < 0) { return; }
+
+ const strDocument = JSON.stringify(newDoc);
+  this.http.patch('http://localhost:3000/documents/' + originalDoc.id
+  , strDocument)
+    .map(
+      (response: Response) => {
+        return response.json();
+      }
+    ).subscribe(
+    (documents: Document[]) => {
+      this.documents = documents;
+    });
 }
   addDocument(document: Document) {
-    this.documents.push(document);
-    return this.http.put('https://iliacms-eb3e9.firebaseio.com/documents.json', this.documents)
-      .map(
-        (response: Response) => { console.log(response.json()); }
-      );
+    const body = JSON.stringify(document);
+    return this.http.post('http://localhost:3000/documents',
+      body)
+      .map((response: Response) => {
+        const result = response.json();
+        const doc = new Document(result.obj.children, result.obj.description, result.obj.id, result.obj.name, result.obj.url);
+        this.documents.push(doc);
+        return doc;
+      })
+      .catch((error: Response) => Observable.throw(JSON.stringify(error)));
   }
   deleteDocument(document: Document) {
-    this.documents.splice(this.documents.indexOf(document), 1);
-    return this.http.put('https://iliacms-eb3e9.firebaseio.com/documents.json', this.documents)
-      .map(
-        (response: Response) => { console.log(response.json()); }
-      );
+    return this.http.delete('http://localhost:3000/documents/' + document.id)
+      .map((response: Response) => {
+        this.documents.splice(this.documents.indexOf(document), 1);
+        return response.json();
+      })
+      .catch((error: Response) => Observable.throw(JSON.stringify(error)));
   }
   getSize() {
     return this.documents.length;
